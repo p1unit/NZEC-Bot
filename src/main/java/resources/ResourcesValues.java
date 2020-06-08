@@ -6,10 +6,10 @@ import java.util.HashMap;
 
 public class ResourcesValues {
 
-    public static String BASE_URL = ConfidentialItems.API_BASE;
-    public static String API_VERSION = ConfidentialItems.API_VERSION;
-    public static String API_TOKEN = ConfidentialItems.API_TOKEN;
-    public static String DISCORD_BOT_TOKEN = ConfidentialItems.BOT_TOKEN;
+    public static String BASE_URL = System.getenv("API_BASE");
+    public static String API_VERSION = System.getenv("API_VERSION");
+    public static String API_TOKEN = System.getenv("API_TOKEN");
+    public static String DISCORD_BOT_TOKEN = System.getenv("BOT_TOKEN");
     public static ZoneId indianZone = ZoneId.of("Asia/Kolkata");
     public static ZoneId GMT = ZoneId.of("UTC");
     private static HashMap<String, Color> colorHashMap;

@@ -17,13 +17,12 @@ public class MessageListner extends ListenerAdapter {
     @Override
     public void onGuildMessageReceived(@Nonnull GuildMessageReceivedEvent event) {
 
-        if(event.getMessage().getAuthor().isBot())
+        if(event.getMessage().getAuthor().isBot() )
             return;
 
-        String[] command = event.getMessage().getContentRaw().split("_");
+        String[] command = event.getMessage().getContentRaw().split("-");
 
-        if(!command[0].equals("$ contest")){
-            event.getChannel().sendMessage("Unrecognised Command").queue();
+        if(!command[0].equals("$ contest") || !event.getChannel().getName().equals(System.getenv("CONTEST-CHANNEL"))){
             return;
         }
 

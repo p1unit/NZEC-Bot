@@ -7,8 +7,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="NZEC BOT" />
+        <module name="NZEC-BOT" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="NZEC BOT" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

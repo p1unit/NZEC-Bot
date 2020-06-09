@@ -48,7 +48,7 @@ public class DailyScheduler {
                 .withIdentity("daily-announcement-trigger", "announcement-group")
                 .startAt(startTime.getTime())
                 .withSchedule(simpleSchedule()
-                        .withIntervalInHours(1)
+                        .withIntervalInHours(24)
                         .repeatForever())
                 .build();
     }

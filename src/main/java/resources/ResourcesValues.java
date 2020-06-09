@@ -34,7 +34,13 @@ public class ResourcesValues {
         colorHashMap.put("leetcode.com",Color.BLACK);
 
         imageMap = new HashMap<>();
-        imageMap.put("codeforces.com","https://1.bp.blogspot.com/-pBimI1ZhYAA/Wnde0nmCz8I/AAAAAAAABPI/5LZ2y9tBOZIV-pm9KNbyNy3WZJkGS54WgCPcBGAYYCw/s1600/codeforce.png");
+        imageMap.put("codeforces.com","https://firebasestorage.googleapis.com/v0/b/opio-208612.appspot.com/o/codeforces.jpeg?alt=media&token=3349df67-d829-47db-bdb8-1a9b05d7b54b");
+        imageMap.put("codingcompetitions.withgoogle.com","https://firebasestorage.googleapis.com/v0/b/opio-208612.appspot.com/o/google.jpg?alt=media&token=934db7bc-1c45-41e9-ae8a-6dca45abddda");
+        imageMap.put("codechef.com","https://firebasestorage.googleapis.com/v0/b/opio-208612.appspot.com/o/codechef.jpg?alt=media&token=abc9647b-8abc-4a7c-9909-4ba1568f2cd0");
+        imageMap.put("hackerrank.com","https://firebasestorage.googleapis.com/v0/b/opio-208612.appspot.com/o/hackerrank.jpeg?alt=media&token=0c96d72d-9179-4363-b098-4b4b14490b9a");
+        imageMap.put("hackerearth.com","https://firebasestorage.googleapis.com/v0/b/opio-208612.appspot.com/o/HackerEarth_logo.png?alt=media&token=21dd50d9-c0f4-45df-8ab3-dc078976ba57");
+        imageMap.put("topcoder.com","https://firebasestorage.googleapis.com/v0/b/opio-208612.appspot.com/o/topcoder.jpeg?alt=media&token=cccb7e04-0b9f-4ff3-b51e-a4245b518f41");
+        imageMap.put("leetcode.com","https://firebasestorage.googleapis.com/v0/b/opio-208612.appspot.com/o/leetcode.png?alt=media&token=03868087-7afc-4ac7-a7ff-d6fff14546d9");
 
     }
 

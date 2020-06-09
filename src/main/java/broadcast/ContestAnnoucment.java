@@ -1,32 +1,21 @@
 package broadcast;
 
-import contestService.ContestLIstService;
-import lombok.SneakyThrows;
-import model.ContestList;
-import retrofit2.Call;
-import retrofit2.Response;
-import serviceGenerator.CListService;
+import contestService.FetchContest;
+import net.dv8tion.jda.api.entities.TextChannel;
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
 import singletonBot.BotApi;
+import java.util.List;
 
-import java.util.Scanner;
-import java.util.TimerTask;
-
-public class ContestAnnoucment implements Runnable {
+public class ContestAnnoucment implements Job {
 
     @Override
-    public void run() {
+    public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
 
-        ContestLIstService cListService  =  CListService.createService(ContestLIstService.class);
-        Call<ContestList> callSync = cListService.getContests(null,null,null,null);
-        ContestList contestList ;
+        TextChannel channel = BotApi.getInstance().
+                getTextChannelById(System.getenv("CONTEST-CHANNEL"));
 
-
-        try {
-            Response<ContestList> response = callSync.execute();
-            contestList = response.body();
-            BotApi.getInstance().getTextChannelById(718694500981014602L).sendMessage("Hello");
-//            BotApi.getInstance()
-        } catch (Exception ex) { ex.printStackTrace(); }
-
+        new FetchContest().getAllContests(channel,1,null);
     }
 }

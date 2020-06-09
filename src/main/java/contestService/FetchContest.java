@@ -2,6 +2,7 @@ package contestService;
 
 import broadcast.EmbedMessageSender;
 import model.ContestList;
+import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import resources.ResourcesValues;
 import retrofit2.Call;
@@ -26,22 +27,22 @@ public class FetchContest {
     }
 
 
-    public void getAllContests(GuildMessageReceivedEvent event, int days,String resourceName){
+    public void getAllContests(MessageChannel channel, int days, String resourceName){
 
         if(days<=0 || days>7){
-            event.getChannel().sendMessage("Days should be between 1 to 7").queue();
+            channel.sendMessage("Days should be between 1 to 7").queue();
             return;
         }
 
         LocalDateTime startTime = LocalDateTime.now(ResourcesValues.GMT);
         LocalDateTime endTime = LocalDateTime.now(ResourcesValues.GMT).plusDays(days);
 
-        getConstrainedContest(event,startTime,endTime,resourceName,days);
+        getConstrainedContest(channel,startTime,endTime,resourceName,days);
 
     }
 
-    private void getConstrainedContest(GuildMessageReceivedEvent event, LocalDateTime startTime, LocalDateTime endTime,
-                                       String resourceName,int days) {
+    private void getConstrainedContest(MessageChannel channel, LocalDateTime startTime, LocalDateTime endTime,
+                                       String resourceName, int days) {
 
         Call<ContestList> callSync = cListService.getContests(resourceName,startTime,endTime,ResourcesValues.ORDER_BY_START);
         ContestList contestList ;
@@ -49,7 +50,7 @@ public class FetchContest {
         try {
             Response<ContestList> response = callSync.execute();
             contestList = response.body();
-            embededMessageSender.sendMessages(event,contestList.getObjects(),days);
+            embededMessageSender.sendMessages( channel,contestList.getObjects(),days);
 
         } catch (Exception ex) { ex.printStackTrace(); }
 

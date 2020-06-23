@@ -3,6 +3,7 @@ package broadcast;
 import lombok.SneakyThrows;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
+import resources.ResourcesValues;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -29,9 +30,9 @@ public class DailyScheduler {
     private static void configureScheduler(){
 
         Calendar startTime = Calendar.getInstance(TimeZone.getTimeZone("Asia/Kolkata"));
-        startTime.set(Calendar.HOUR,Integer.parseInt(System.getenv("HRS")));
-        startTime.set(Calendar.MINUTE, Integer.parseInt(System.getenv("MIN")));
-        startTime.set(Calendar.SECOND, Integer.parseInt(System.getenv("SEC")));
+        startTime.set(Calendar.HOUR, ResourcesValues.GET_HRS);
+        startTime.set(Calendar.MINUTE, ResourcesValues.GET_MIN);
+        startTime.set(Calendar.SECOND, ResourcesValues.GET_SEC);
         startTime.set(Calendar.AM_PM, Calendar.AM);
 
         if (startTime.getTime().getTime() < Calendar.getInstance().getTime().getTime()) {

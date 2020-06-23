@@ -1,3 +1,2 @@
 src/main/java/resources/ConfidentialItems.java
-target/NZEC-BOT-1.0.jar
-target/original-NZEC-BOT-1.0.jar
+*.jar

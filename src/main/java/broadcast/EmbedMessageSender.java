@@ -31,11 +31,11 @@ public class EmbedMessageSender {
             String endDate = convertToIST(object.getEnd());
 
             embedBuilder.addField("Start Date",startDate.split("T")[0],true);
-            embedBuilder.addBlankField(true);
             embedBuilder.addField("Start Time",startDate.split("T")[1],true);
 
+            embedBuilder.addBlankField(false);
+
             embedBuilder.addField("End Date",endDate.split("T")[0],true);
-            embedBuilder.addBlankField(true);
             embedBuilder.addField("End Time",endDate.split("T")[1],true);
 
             embedBuilder.addField("Contest Link",object.getHref(),false);

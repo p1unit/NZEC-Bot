@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.priv.PrivateMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import resources.ResourcesValues;
 
 import javax.annotation.Nonnull;
 
@@ -45,7 +46,7 @@ public class MessageListner extends ListenerAdapter {
 
         String[] command = event.getMessage().getContentRaw().split("-");
 
-        if(!command[0].equals("$ contest") || !event.getChannel().getId().equals(System.getenv("CONTEST-CHANNEL"))){
+        if(!command[0].equals("$ contest") || !event.getChannel().getId().equals(ResourcesValues.CHANNEL_ID)){
             return;
         }
 

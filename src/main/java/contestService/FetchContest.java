@@ -20,29 +20,19 @@ import java.util.TimeZone;
 public class FetchContest {
 
     ContestLIstService cListService  =  CListService.createService(ContestLIstService.class);
-    EmbedMessageSender embededMessageSender;
-
-    public FetchContest(){
-        embededMessageSender = new EmbedMessageSender();
-    }
 
 
-    public void getAllContests(MessageChannel channel, int days, String resourceName){
-
-        if(days<=0 || days>7){
-            channel.sendMessage("Days should be between 1 to 7").queue();
-            return;
-        }
+    public ContestList getAllContests( int days, String resourceName){
 
         LocalDateTime startTime = LocalDateTime.now(ResourcesValues.GMT);
         LocalDateTime endTime = LocalDateTime.now(ResourcesValues.GMT).plusDays(days);
 
-        getConstrainedContest(channel,startTime,endTime,resourceName,days);
+        return getConstrainedContest(startTime,endTime,resourceName,days);
 
     }
 
-    private void getConstrainedContest(MessageChannel channel, LocalDateTime startTime, LocalDateTime endTime,
-                                       String resourceName, int days) {
+    private ContestList getConstrainedContest( LocalDateTime startTime, LocalDateTime endTime,
+                                              String resourceName, int days) {
 
         Call<ContestList> callSync = cListService.getContests(resourceName,startTime,endTime,ResourcesValues.ORDER_BY_START);
         ContestList contestList ;
@@ -50,9 +40,11 @@ public class FetchContest {
         try {
             Response<ContestList> response = callSync.execute();
             contestList = response.body();
-            embededMessageSender.sendMessages( channel,contestList.getObjects(),days);
+            return contestList;
 
         } catch (Exception ex) { ex.printStackTrace(); }
+
+        return null;
 
     }
 

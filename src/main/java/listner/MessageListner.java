@@ -1,6 +1,8 @@
 package listner;
 
+import broadcast.EmbedMessageSender;
 import contestService.FetchContest;
+import model.ContestList;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.PrivateChannel;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -14,9 +16,11 @@ import javax.annotation.Nonnull;
 public class MessageListner extends ListenerAdapter {
 
     FetchContest fetchContest;
+    EmbedMessageSender embedMessageSender;
 
     public MessageListner(){
         fetchContest = new FetchContest();
+        embedMessageSender = new EmbedMessageSender();
     }
 
 
@@ -33,7 +37,7 @@ public class MessageListner extends ListenerAdapter {
         }
 
         MessageChannel messageChannel = event.getChannel();
-        callApi(command, messageChannel);
+        execute(command, messageChannel);
     }
 
 
@@ -46,28 +50,40 @@ public class MessageListner extends ListenerAdapter {
 
         String[] command = event.getMessage().getContentRaw().split("-");
 
-        if(!command[0].equals("$ contest") || !event.getChannel().getId().equals(ResourcesValues.CHANNEL_ID)){
+        if(!command[0].equals("$ contest") || !event.getChannel().getName().equals(ResourcesValues.CHANNEL_NAME)){
             return;
         }
 
         MessageChannel messageChannel = event.getChannel();
-        callApi(command,messageChannel);
+        execute(command,messageChannel);
 
     }
 
-    private void callApi(String[] command, MessageChannel event){
+    private void execute(String[] command, MessageChannel channel){
+
+        int days = command.length==1 ? 1 : Integer.parseInt(command[1]);
+
+        if(days<=0 || days>7){
+            channel.sendMessage("Days should be between 1 to 7").queue();
+            return;
+        }
+
+        ContestList contestList = callApi(command);
+        embedMessageSender.sendMessages( channel,contestList.getObjects(),days);
+
+    }
+
+    private ContestList callApi(String[] command ){
 
         switch (command.length){
             case 1:
-                fetchContest.getAllContests(event,1,null);
-                break;
+                return fetchContest.getAllContests(1,null);
             case 2:
-                fetchContest.getAllContests(event,Integer.parseInt(command[1]),null);
-                break;
+                return fetchContest.getAllContests(Integer.parseInt(command[1]),null);
             case 3:
-                fetchContest.getAllContests(event,Integer.parseInt(command[1]),command[2]);
-                break;
+                return fetchContest.getAllContests(Integer.parseInt(command[1]),command[2]);
         }
 
+        return null;
     }
 }

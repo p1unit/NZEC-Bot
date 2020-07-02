@@ -6,11 +6,13 @@ import java.util.HashMap;
 
 public class ResourcesValues {
 
+
     public static String BASE_URL = System.getenv("API_BASE");
     public static String API_VERSION = System.getenv("API_VERSION");
     public static String API_TOKEN = System.getenv("API_TOKEN");
     public static String DISCORD_BOT_TOKEN = System.getenv("BOT_TOKEN");
     public static final String CHANNEL_ID = System.getenv("CONTEST-CHANNEL");
+    public static final String CHANNEL_NAME = System.getenv("CONTEST-CHANNEL-NAME");
     public static final int GET_HRS = Integer.parseInt(System.getenv("HRS"));
     public static final int GET_MIN = Integer.parseInt(System.getenv("MIN"));
     public static final int GET_SEC = Integer.parseInt(System.getenv("SEC"));

@@ -16,7 +16,7 @@ public class EmbedMessageSender {
             return;
         }
 
-        channel.sendMessage("Contest Starting under "+days+" days").queue();
+        channel.sendMessage("Contest starting under "+days*24+" hours ").queue();
 
         for(Object object:objects){
 

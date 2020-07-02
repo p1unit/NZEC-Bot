@@ -36,7 +36,11 @@ public class DailyScheduler {
         startTime.set(Calendar.AM_PM, Calendar.AM);
 
         if (startTime.getTime().getTime() < Calendar.getInstance().getTime().getTime()) {
-            startTime.add(Calendar.DATE, 1);
+            startTime.add(Calendar.HOUR, 12);
+        }
+
+        if (startTime.getTime().getTime() < Calendar.getInstance().getTime().getTime()) {
+            startTime.add(Calendar.HOUR, 12);
         }
 
         System.out.println(startTime.getTime().getTime()+" "+Calendar.getInstance().getTime().getTime());
@@ -49,7 +53,7 @@ public class DailyScheduler {
                 .withIdentity("daily-announcement-trigger", "announcement-group")
                 .startAt(startTime.getTime())
                 .withSchedule(simpleSchedule()
-                        .withIntervalInHours(24)
+                        .withIntervalInHours(12)
                         .repeatForever())
                 .build();
     }
